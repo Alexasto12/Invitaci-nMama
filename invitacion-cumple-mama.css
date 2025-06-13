@@ -21,7 +21,8 @@ main {
   padding-right: 0.3rem;
   box-sizing: border-box;
   max-height: 100dvh;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
