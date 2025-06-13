@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invitación Cumpleaños Mamá</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Dancing Script -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./invitacion-cumple-mama.css">
+</head>
+<body class="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-yellow-100 to-pink-100 overflow-x-hidden">
+
+  <!-- Caras flotantes (confeti tierno) -->
+  <!-- Sustituye las rutas src por las fotos de los hijos de tu madre -->
+  <img src="./meedia/Andrea.png" class="floating-face" style="left: 15vw; animation-delay: 0s;">
+  <img src="./meedia/Maria.png" class="floating-face" style="left: 50vw; animation-delay: 4s;">
+  <img src="./meedia/Alex.png" class="floating-face" style="left: 80vw; animation-delay: 8s;">
+  <!-- Puedes duplicar o añadir más imágenes si lo deseas -->
+
+  <main class="relative z-10 w-full max-w-md mx-auto px-4 pt-10 pb-8 flex flex-col items-center">
+    <!-- Mensaje inicial -->
+    <h1 class="text-3xl md:text-4xl text-pink-600 font-title text-center mb-4 drop-shadow">
+      ¡Feliz cumpleaños, mamá!
+    </h1>
+    <div class="w-full flex flex-col items-center mb-6">
+      <div class="bg-pink-100 border-2 border-pink-400 rounded-2xl px-4 py-3 shadow-md flex flex-col items-center animate-fade-in animate-bounce-in">
+        <span class="text-2xl font-title text-pink-700 mb-1 animate-wiggle">🎉 Estás invitada 🎉</span>
+        <span class="text-lg text-pink-800 font-normal text-center animate-fade-in">Queremos celebrar contigo un día muy especial.<br>¡Un dia para recordar!</span>
+      </div>
+    </div>
+    <p class="text-lg text-gray-700 font-normal text-center mb-8">
+      Este año hemos preparado dos posibles planes para celebrarlo.<br>
+      <span class="text-teal-600 font-semibold">¡Elige el que más te apetezca!</span>
+    </p>
+
+    <!-- Opciones de planes -->
+    <div class="flex justify-center gap-8 mb-6">
+      <!-- Burbuja 1 -->
+      <button id="bubble1" class="bubble flex flex-col items-center justify-center w-24 h-24 rounded-full bg-white shadow-md border-2 border-yellow-200 hover:scale-105 focus:outline-none transition-all">
+        <!-- Imagen representativa de la Costa Brava -->
+        <!-- Sustituye el src por tu imagen -->
+        <img src="https://xalocdive.cat/wp-content/uploads/2019/04/Islas-Medas-xalocdivingcenter.jpg" alt="Costa Brava" class="w-14 h-14 rounded-full object-cover" style="width:100%;height:100%;">
+      </button>
+      <!-- Burbuja 2 -->
+      <button id="bubble2" class="bubble flex flex-col items-center justify-center w-24 h-24 rounded-full bg-white shadow-md border-2 border-yellow-200 hover:scale-105 focus:outline-none transition-all">
+        <!-- Imagen representativa de Capdevànol -->
+        <!-- Sustituye el src por tu imagen -->
+        <img src="https://mediaim.expedia.com/destination/3/f3a49606c5e5bd142065840df454aef5.jpg" alt="Capdevànol" class="w-14 h-14 rounded-full object-cover" style="width:100%;height:100%;">
+      </button>
+    </div>
+
+    <!-- Detalles del plan seleccionado -->
+    <div id="planDetails" class="w-full bg-white/80 rounded-xl shadow p-4 mt-2 mb-4 hidden animate-fade-in">
+      <!-- Se rellena dinámicamente -->
+    </div>
+
+    <!-- Botón de confirmación -->
+    <button id="confirmBtn" class="w-full py-3 mt-2 rounded-xl bg-pink-400 text-white font-title text-xl shadow-lg hover:bg-pink-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+      Confirmar opción y fecha
+    </button>
+
+    <!-- Mensaje de éxito/error -->
+    <div id="message" class="w-full text-center mt-4 text-base font-normal"></div>
+  </main>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="./invitacion-cumple-mama.js"></script>
+  <style>
+    @keyframes bounceIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      80% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+    .animate-bounce-in {
+      animation: bounceIn 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      20% { transform: rotate(5deg); }
+      40% { transform: rotate(-8deg); }
+      60% { transform: rotate(8deg); }
+      80% { transform: rotate(-5deg); }
+    }
+    .animate-wiggle {
+      animation: wiggle 1.2s ease-in-out 1;
+    }
+    /* Animación de confeti extra */
+    .confetti {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0.7;
+      z-index: 2;
+      pointer-events: none;
+      animation: confetti-fall 2.5s linear infinite;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-20px) scale(1) rotate(0deg); opacity: 0.8; }
+      80% { opacity: 1; }
+      100% { transform: translateY(110vh) scale(1.1) rotate(360deg); opacity: 0.2; }
+    }
+  </style>
+  <script>
+    // Confeti animado extra
+    document.addEventListener('DOMContentLoaded', () => {
+      const colors = ['#f472b6','#38bdf8','#34d399','#fbbf24','#f87171','#a78bfa'];
+      for(let i=0;i<18;i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.background = colors[Math.floor(Math.random()*colors.length)];
+        c.style.animationDelay = (Math.random()*2.5) + 's';
+        document.body.appendChild(c);
+      }
+    });
+  </script>
+</body>
+</html>
