@@ -3,20 +3,37 @@ body {
   background: linear-gradient(to bottom, #b2f5ea 0%, #38b2ac 100%);
   min-height: 100vh;
   min-height: 100dvh;
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+
   overflow: hidden !important;
   position: relative;
+
+  font-size: 15px;
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
 }
 main {
+  max-width: 100vw;
+  width: 100vw;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  box-sizing: border-box;
   max-height: 100dvh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.97em;
+}
+main::-webkit-scrollbar {
+  display: none;
 }
 .floating-face {
   position: absolute;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   border-radius: 9999px;
   object-fit: cover;
   opacity: 0.85;
@@ -43,6 +60,7 @@ main {
 .font-title {
   font-family: 'Dancing Script', cursive;
   font-weight: 700;
+  font-size: 1.7rem;
 }
 .bubble-active {
   box-shadow: 0 0 0 4px #059669, 0 4px 16px rgba(5,150,105,0.2);
@@ -55,10 +73,75 @@ main {
 .bubble img {
   border: 2px solid #059669;
 }
+.bubble, .bubble img {
+  width: 3.7rem;
+  height: 3.7rem;
+  min-width: 2.7rem;
+  min-height: 2.7rem;
+}
+.text-lg {
+  font-size: 1.05rem;
+}
+#main-content {
+  width: 100%;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: calc(100dvh - 110px);
+  position: relative;
+  z-index: 10;
+}
+#confirmBtn {
+  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
 .animate-fade-in {
   animation: fadeIn 0.5s;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px);}
   to { opacity: 1; transform: translateY(0);}
+}
+/* Ajuste para la descripción del plan */
+#planDetails .text-base, #planDetails p {
+  font-size: 0.93rem !important;
+  padding-left: 0.7rem !important;
+  padding-right: 0.7rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  line-height: 1.3 !important;
+}
+#planDetails .flex.items-center.gap-3.mb-4 > div {
+  max-width: 68vw;
+}
+@media (max-width: 400px) {
+  main {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    font-size: 0.93em;
+      scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  }
+  .bubble, .bubble img {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+  .font-title {
+    font-size: 1.1rem !important;
+  }
+  .text-lg {
+    font-size: 0.95rem !important;
+  }
+  #main-content {
+    max-height: calc(100dvh - 90px);
+  }
+  #planDetails .text-base, #planDetails p {
+    font-size: 0.85rem !important;
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+  }
+  #planDetails .flex.items-center.gap-3.mb-4 > div {
+    max-width: 60vw;
+  }
 }
