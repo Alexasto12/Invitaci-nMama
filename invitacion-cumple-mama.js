@@ -140,13 +140,15 @@ window.addEventListener('DOMContentLoaded', () => {
   faces.forEach((face, i) => {
     let vw = getVW();
     let vh = getVH();
-    let x = Math.random() * (vw - 56);
-    let y = -60;
-    let speedY = 0.4 + Math.random() * 0.5;
-    let speedX = (Math.random() - 0.5) * 1.2;
+    let faceSize = 96; // Tamaño aumentado (antes 56)
+    let x = Math.random() * (vw - faceSize);
+    let y = -faceSize - 10;
+    let speedY = 1.2 + Math.random() * 0.8; // Más rápido (antes 0.4-0.9)
+    let speedX = (Math.random() - 0.5) * 2.2; // Más rápido (antes 1.2)
     let rebotes = 0;
     face.style.left = `${x}px`;
     face.style.top = `${y}px`;
+    face.style.width = face.style.height = faceSize + 'px'; // Aumentar tamaño
     face.style.animation = 'none';
     function animate() {
       vw = getVW();
@@ -155,10 +157,10 @@ window.addEventListener('DOMContentLoaded', () => {
       y += speedY;
       // Rebote en los lados
       if (x <= 0) { x = 0; speedX *= -1; }
-      if (x >= vw - 56) { x = vw - 56; speedX *= -1; }
+      if (x >= vw - faceSize) { x = vw - faceSize; speedX *= -1; }
       // Rebote abajo
-      if (y >= vh - 56) {
-        y = vh - 56;
+      if (y >= vh - faceSize) {
+        y = vh - faceSize;
         speedY *= -1;
         rebotes++;
       }
@@ -168,13 +170,13 @@ window.addEventListener('DOMContentLoaded', () => {
         speedY *= -1;
       }
       // Si se queda "parado" por redondeo, reiniciar
-      if (Math.abs(speedY) < 0.1) speedY = 0.4 + Math.random() * 0.5;
+      if (Math.abs(speedY) < 0.2) speedY = 1.2 + Math.random() * 0.8;
       // Si lleva muchos rebotes, reiniciar arriba
       if (rebotes > 6) {
-        y = -60;
-        x = Math.random() * (vw - 56);
-        speedY = 0.4 + Math.random() * 0.5;
-        speedX = (Math.random() - 0.5) * 1.2;
+        y = -faceSize - 10;
+        x = Math.random() * (vw - faceSize);
+        speedY = 1.2 + Math.random() * 0.8;
+        speedX = (Math.random() - 0.5) * 2.2;
         rebotes = 0;
       }
       face.style.left = `${x}px`;
