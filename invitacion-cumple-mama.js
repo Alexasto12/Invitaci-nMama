@@ -1,4 +1,3 @@
-
 const EMAILJS_USER_ID = '9mqiGZRG14PdxJ3S3';
 const EMAILJS_SERVICE_ID = 'service_s4tewxn';
 const EMAILJS_TEMPLATE_ID = 'template_mxrfzio';
@@ -98,9 +97,12 @@ confirmBtn.addEventListener('click', function() {
   messageDiv.textContent = "Enviando invitación...";
   messageDiv.className = "w-full text-center mt-4 text-base text-gray-600 font-normal";
 
+  // Convierte la fecha a YYYYMMDD para Google Calendar
+  const fechaGoogle = selectedDate.replace(/-/g, '');
+
   const templateParams = {
     plan: selectedPlan.title,
-    fecha: selectedDate,
+    fecha: fechaGoogle, // <-- ahora en formato correcto
     destinatarios: DESTINATARIOS.join(', '),
     mensaje: `¡Hola mamá! Has elegido: ${selectedPlan.title} para el día ${selectedDate}. ¡Será un día inolvidable!`
   };
