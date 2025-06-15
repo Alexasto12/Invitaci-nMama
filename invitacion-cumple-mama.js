@@ -23,10 +23,10 @@ const plans = [
 
 // Corrección para EmailJS v3
 const DESTINATARIOS = [
-  "Alexasto2000@gmail.com",
-  "tu_correo@ejemplo.com",
-  "hermana1@ejemplo.com",
-  "hermana2@ejemplo.com"
+  "lunacarrascor@gmail.com",
+  "lunandcc@gmail.com",
+  "silency_flower@hotmail.com",
+  "Alexasto2000@gmail.com"
 ];
 
 let selectedPlan = null;
@@ -97,14 +97,25 @@ confirmBtn.addEventListener('click', function() {
   messageDiv.textContent = "Enviando invitación...";
   messageDiv.className = "w-full text-center mt-4 text-base text-gray-600 font-normal";
 
-  // Convierte la fecha a YYYYMMDD para Google Calendar
+  // Convierte la fecha a YYYYMMDD para Google Calendar y EmailJS
   const fechaGoogle = selectedDate.replace(/-/g, '');
+  const fecha_es = `${fechaGoogle.slice(6,8)}/${fechaGoogle.slice(4,6)}/${fechaGoogle.slice(0,4)}`;
+
+  // Depuración: muestra los datos que se van a enviar
+  console.log('templateParams:', {
+    plan: selectedPlan.title,
+    fecha: fechaGoogle,
+    fecha_es: fecha_es,
+    mensaje: `¡Hola mamá! Has elegido: ${selectedPlan.title} para el día ${selectedDate}. ¡Será un día inolvidable en familia! Tus hijos te quieren mucho. ❤️ `,
+    destinatarios: DESTINATARIOS.join(', ')
+  });
 
   const templateParams = {
     plan: selectedPlan.title,
-    fecha: fechaGoogle, // <-- ahora en formato correcto
-    destinatarios: DESTINATARIOS.join(', '),
-    mensaje: `¡Hola mamá! Has elegido: ${selectedPlan.title} para el día ${selectedDate}. ¡Será un día inolvidable!`
+    fecha: fechaGoogle,
+    fecha_es: fecha_es,
+    mensaje: `¡Hola mamá! Has elegido: ${selectedPlan.title} para el día ${selectedDate}. ¡Será un día inolvidable en familia! Tus hijos te quieren mucho. ❤️`,
+    destinatarios: DESTINATARIOS.join(', ')
   };
 
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
@@ -116,6 +127,8 @@ confirmBtn.addEventListener('click', function() {
       messageDiv.textContent = "Error al enviar la invitación. Intenta de nuevo.";
       messageDiv.className = "w-full text-center mt-4 text-base text-red-600 font-title";
       confirmBtn.disabled = false;
+      // Depuración: muestra el error
+      console.error('EmailJS error:', error);
     });
 });
 
