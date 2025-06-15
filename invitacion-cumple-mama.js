@@ -1,8 +1,7 @@
-// Configura aquí tus claves de EmailJS
-// Reemplaza estos valores por los tuyos de https://dashboard.emailjs.com/
-const EMAILJS_USER_ID = 'TU_USER_ID';
-const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID';
+
+const EMAILJS_USER_ID = '9mqiGZRG14PdxJ3S3';
+const EMAILJS_SERVICE_ID = 'service_s4tewxn';
+const EMAILJS_TEMPLATE_ID = 'template_mxrfzio';
 
 // Corrección para EmailJS v3
 emailjs.init(EMAILJS_USER_ID);
@@ -23,9 +22,9 @@ const plans = [
   }
 ];
 
-// Correos de destino (pon aquí los emails de tu madre, el tuyo y tus hermanas)
+// Corrección para EmailJS v3
 const DESTINATARIOS = [
-  "correo_mama@ejemplo.com",
+  "Alexasto2000@gmail.com",
   "tu_correo@ejemplo.com",
   "hermana1@ejemplo.com",
   "hermana2@ejemplo.com"
